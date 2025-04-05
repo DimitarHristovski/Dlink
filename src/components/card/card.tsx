@@ -9,12 +9,7 @@ export const Card = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div
-      className={cn(
-        "rounded-2xl border shadow-md bg-white dark:bg-neutral-900",
-        className
-      )}
-    >
+    <div className={cn("rounded-2xl border shadow-md ", className)}>
       {children}
     </div>
   );
