@@ -9,7 +9,7 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "px-4 py-2 rounded-xl font-medium bg-purple-600 text-white hover:bg-purple-700 transition",
+        "px-4 py-2 rounded-xl font-medium bg-blue-600 text-white hover:bg-blue-700 transition",
         className
       )}
       {...props}
