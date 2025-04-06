@@ -4,17 +4,68 @@ import { Button } from "../components/buttons/button";
 import { Card, CardContent } from "./../components/card/card";
 import { Switch } from "../components/switch/switch";
 import { Sun, Moon } from "lucide-react";
-import { Linkedin, Youtube, Coffee, Globe } from "lucide-react";
-
+import { Linkedin, User, Github, Beef } from "lucide-react";
 export default function Dlink() {
   const [darkMode, setDarkMode] = useState(true);
+  const [activeTab, setActiveTab] = useState("social");
 
-  const links = [
-    { title: "My Portfolio", url: "https://example.com" },
-    { title: "Linkedin", url: "https://instagram.com" },
-    { title: "YouTube Channel", url: "https://youtube.com" },
-    { title: "Buy Me Coffee ☕", url: "https://buymeacoffee.com" },
-  ];
+  const LinkIcon = ({ link }: { link: string }) => {
+    if (link.includes("My Portfolio")) return <User className="w-5 h-5" />;
+    if (link.includes("Linkedin")) return <Linkedin className="w-5 h-5" />;
+    if (link.includes("Github")) return <Github className="w-5 h-5" />;
+    if (link.includes("Grillschulle")) return <Beef className="w-5 h-5" />;
+
+    return null;
+  };
+
+  const linkGroups: Record<string, { title: string; url: string }[]> = {
+    social: [
+      {
+        title: "Linkedin",
+        url: "https://linkedin.com/in/dimitar-hristovski-1711a9163",
+      },
+      {
+        title: "Github",
+        url: "https://github.com/DimitarHristovski",
+      },
+    ],
+    openSource: [
+      {
+        title: "LearnHub",
+        url: "https://learnhub.mk/",
+      },
+    ],
+    coOwned: [{ title: "Grillschulle", url: "https://startupx.com" }],
+    hobbieProjects: [
+      { title: "Photography Blog", url: "https://igraliste-one.vercel.app/" },
+      { title: "Guitar Covers", url: "https://youtube.com/guitarz" },
+      { title: "Guitar Covers", url: "https://youtube.com/guitarz" },
+
+      { title: "Guitar Covers", url: "https://youtube.com/guitarz" },
+
+      { title: "Guitar Covers", url: "https://youtube.com/guitarz" },
+
+      { title: "Guitar Covers", url: "https://youtube.com/guitarz" },
+    ],
+    main: [
+      {
+        title: "My Portfolio",
+        url: "https://my-portfolio-git-main-dimitarhristovskis-projects.vercel.app/",
+      },
+      {
+        title: "My Blog",
+        url: "https://my-portfolio-git-main-dimitarhristovskis-projects.vercel.app/",
+      },
+    ],
+  };
+
+  const tabNames = {
+    social: "Social Media",
+    coOwned: "Co-Owned Projects",
+    hobbieProjects: "Hobbie-Projects",
+    main: "Main Projects",
+    openSource: "Open Source",
+  };
 
   return (
     <div
@@ -40,10 +91,25 @@ export default function Dlink() {
         <p className="text-sm opacity-75">Building cool stuff on the web 🚀</p>
       </div>
 
+      <div className="mt-6 flex justify-center gap-2 flex-wrap">
+        {Object.keys(tabNames).map((key) => (
+          <Button
+            key={key}
+            className={`${
+              activeTab === key ? "bg-purple-700" : "bg-purple-500"
+            }`}
+            onClick={() => setActiveTab(key)}
+          >
+            {tabNames[key as keyof typeof tabNames]}
+          </Button>
+        ))}
+      </div>
+
       <div className="mt-6 w-full max-w-md space-y-4">
-        {links.map((link, idx) => (
+        {linkGroups[activeTab].map((link, idx) => (
           <Card key={idx} className="hover:scale-[1.02] transition-transform">
-            <CardContent className="p-4">
+            <CardContent className="p-4 flex items-center gap-3">
+              <LinkIcon link={link.title} />
               <a
                 href={link.url}
                 target="_blank"
