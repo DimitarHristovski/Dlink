@@ -4,6 +4,7 @@ import { Button } from "../components/buttons/button";
 import { Card, CardContent } from "./../components/card/card";
 import { Switch } from "../components/switch/switch";
 import { Sun, Moon } from "lucide-react";
+import { linkGroups, tabNames } from "@/Data/ProjectData";
 import {
   Linkedin,
   Dribbble,
@@ -17,6 +18,7 @@ import {
 export default function Dlink() {
   const [darkMode, setDarkMode] = useState(true);
   const [activeTab, setActiveTab] = useState("social");
+  const [tabIndex, setTabIndex] = useState(0);
 
   const LinkIcon = ({ link }: { link: string }) => {
     if (link.includes("My Portfolio")) return <User className="w-5 h-5" />;
@@ -40,115 +42,16 @@ export default function Dlink() {
     return null;
   };
 
-  const linkGroups: Record<string, { title: string; url: string }[]> = {
-    aiagents: [
-      {
-        title: "Coming Soon...",
-        url: "",
-      },
-    ],
+  const tabKeys = Object.keys(tabNames);
+  const visibleTabs = tabKeys.slice(tabIndex, tabIndex + 3);
 
-    games: [
-      {
-        title: "Car Race",
-        url: "https://car-race-game-opal.vercel.app/",
-      },
-      {
-        title: "Coming Soon...",
-        url: "",
-      },
-    ],
-    social: [
-      {
-        title: "Linkedin",
-        url: "https://linkedin.com/in/dimitar-hristovski-1711a9163",
-      },
-      {
-        title: "Github",
-        url: "https://github.com/DimitarHristovski",
-      },
-      {
-        title: "Dribbble",
-        url: "https://dribbble.com/DimitarHristovski",
-      },
-    ],
-    openSource: [
-      {
-        title: "LearnHub",
-        url: "https://learnhub.mk/",
-      },
-    ],
-    coOwned: [
-      { title: "Grillschulle", url: "" },
-      {
-        title: "Vesna-Dent",
-        url: "https://github.com/DimitarHristovski/vesna-dent",
-      },
-      {
-        title: "Coming Soon...",
-        url: "",
-      },
-    ],
-    hobbieProjects: [
-      { title: "Furwood", url: "https://furwood-e-store.vercel.app/" },
-      {
-        title: "COZA STORE",
-        url: "https://clothes-store-inky-pi.vercel.app/",
-      },
-
-      {
-        title: "Portofolio(Competition)",
-        url: "https://assignment-two-portfolio.vercel.app/#",
-      },
-      {
-        title: "Igraliste",
-        url: "https://igraliste-one.vercel.app/",
-      },
-      {
-        title: "EduCenter",
-        url: "https://github.com/DimitarHristovski/EduCenter",
-      },
-
-      {
-        title: "Architecture",
-        url: "https://github.com/DimitarHristovski/Architecture",
-      },
-
-      {
-        title: "Restaurant",
-        url: "https://github.com/DimitarHristovski/FoodRestaurant",
-      },
-      {
-        title: "Coming Soon...",
-        url: "",
-      },
-    ],
-    main: [
-      {
-        title: "My Portfolio",
-        url: "https://my-portfolio-git-main-dimitarhristovskis-projects.vercel.app/",
-      },
-      {
-        title: "My Blog",
-        url: "https://my-portfolio-git-main-dimitarhristovskis-projects.vercel.app/",
-      },
-      {
-        title: "Coming Soon...",
-        url: "",
-      },
-    ],
+  const nextTabs = () => {
+    setTabIndex((prev) => (prev + 3 < tabKeys.length ? prev + 1 : prev));
   };
 
-  const tabNames = {
-    social: "Social Media",
-    openSource: "Open Source",
-    hobbieProjects: "Hobbie-Projects",
-    aiagents: "AI-Agents",
-    coOwned: "Co-Owned Projects",
-    main: "Main Projects",
-    games: "Games",
+  const prevTabs = () => {
+    setTabIndex((prev) => (prev - 1 >= 0 ? prev - 1 : 0));
   };
-
   return (
     <div
       className={`${
@@ -177,9 +80,10 @@ export default function Dlink() {
         </p>
       </div>
 
-      <div className="mt-6 flex justify-center gap-2 flex-wrap">
-        {Object.keys(tabNames).map((key) => {
-          return (
+      <div className="mt-6 flex items-center gap-2">
+        <Button onClick={prevTabs}>&lt;</Button>
+        <div className="flex gap-2 flex-wrap">
+          {visibleTabs.map((key) => (
             <Button
               key={key}
               className={`${activeTab === key ? "bg-blue-700" : "bg-blue-500"}`}
@@ -187,8 +91,9 @@ export default function Dlink() {
             >
               {tabNames[key as keyof typeof tabNames]}
             </Button>
-          );
-        })}
+          ))}
+        </div>
+        <Button onClick={nextTabs}>&gt;</Button>
       </div>
 
       <div className="mt-6 w-full max-w-md space-y-4">
