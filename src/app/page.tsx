@@ -15,6 +15,7 @@ import {
   Gamepad2,
   ShoppingBag,
 } from "lucide-react";
+import Image from "next/image";
 export default function Dlink() {
   const [darkMode, setDarkMode] = useState(true);
   const [activeTab, setActiveTab] = useState("social");
@@ -67,7 +68,7 @@ export default function Dlink() {
       </div>
 
       <div className="mt-6 text-center">
-        <img
+        <Image
           src="/Profile.jpeg"
           alt="profile"
           className="rounded-full w-24 h-24 mx-auto border-4 border-blue-500"
