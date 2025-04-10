@@ -100,9 +100,9 @@ export const linkGroups: Record<string, { title: string; url: string }[]> = {
 export const tabNames = {
   social: "Social Media",
   openSource: "Open Source",
-  hobbieProjects: "Hobbie-Projects",
+  hobbieProjects: "Hobby Projects",
   aiagents: "AI-Agents",
-  coOwned: "Co-Owned Projects",
+  coOwned: "Client Projects",
   main: "Main Projects",
   games: "Games",
 };

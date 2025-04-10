@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Button } from "../components/buttons/button";
+import { ArrowButton, Button } from "../components/buttons/button";
 import { Card, CardContent } from "./../components/card/card";
 import { Switch } from "../components/switch/switch";
 import { Sun, Moon } from "lucide-react";
@@ -44,7 +44,7 @@ export default function Dlink() {
   };
 
   const tabKeys = Object.keys(tabNames);
-  const visibleTabs = tabKeys.slice(tabIndex, tabIndex + 1);
+  const visibleTabs = tabKeys.slice(tabIndex, tabIndex + 2);
 
   const nextTabs = () => {
     setTabIndex((prev) => (prev + 3 < tabKeys.length ? prev + 1 : prev));
@@ -84,7 +84,7 @@ export default function Dlink() {
       </div>
 
       <div className="mt-6 flex items-center gap-2">
-        <Button onClick={prevTabs}>&lt;</Button>
+        <ArrowButton onClick={prevTabs}>&lt;</ArrowButton>
         <div className="flex gap-2 flex-wrap">
           {visibleTabs.map((key) => (
             <Button
@@ -96,7 +96,7 @@ export default function Dlink() {
             </Button>
           ))}
         </div>
-        <Button onClick={nextTabs}>&gt;</Button>
+        <ArrowButton onClick={nextTabs}>&gt;</ArrowButton>
       </div>
 
       <div className="mt-6 w-full max-w-md space-y-4">
