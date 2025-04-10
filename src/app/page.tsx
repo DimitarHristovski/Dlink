@@ -1,103 +1,119 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import { Button } from "../components/buttons/button";
+import { Card, CardContent } from "./../components/card/card";
+import { Switch } from "../components/switch/switch";
+import { Sun, Moon } from "lucide-react";
+import { linkGroups, tabNames } from "@/Data/ProjectData";
+import {
+  Linkedin,
+  Dribbble,
+  User,
+  Github,
+  Beef,
+  Code,
+  Gamepad2,
+  ShoppingBag,
+} from "lucide-react";
+export default function Dlink() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [activeTab, setActiveTab] = useState("social");
+  const [tabIndex, setTabIndex] = useState(0);
 
-export default function Home() {
+  const LinkIcon = ({ link }: { link: string }) => {
+    if (link.includes("My Portfolio")) return <User className="w-5 h-5" />;
+    if (link.includes("My Blog")) return <User className="w-5 h-5" />;
+    if (link.includes("Dribbble")) return <Dribbble className="w-5 h-5" />;
+
+    if (link.includes("Linkedin")) return <Linkedin className="w-5 h-5" />;
+    if (link.includes("Github")) return <Github className="w-5 h-5" />;
+    if (link.includes("Grillschulle")) return <Beef className="w-5 h-5" />;
+    if (link.includes("Furwood")) return <ShoppingBag className="w-5 h-5" />;
+    if (link.includes("COZA STORE")) return <ShoppingBag className="w-5 h-5" />;
+    if (link.includes("Portofolio(Competition)"))
+      return <Code className="w-5 h-5" />;
+    if (link.includes("Igraliste")) return <ShoppingBag className="w-5 h-5" />;
+    if (link.includes("Restaurant")) return <Code className="w-5 h-5" />;
+    if (link.includes("Architecture")) return <Code className="w-5 h-5" />;
+    if (link.includes("EduCenter")) return <Code className="w-5 h-5" />;
+
+    if (link.includes("Car Race")) return <Gamepad2 className="w-5 h-5" />;
+
+    return null;
+  };
+
+  const tabKeys = Object.keys(tabNames);
+  const visibleTabs = tabKeys.slice(tabIndex, tabIndex + 3);
+
+  const nextTabs = () => {
+    setTabIndex((prev) => (prev + 3 < tabKeys.length ? prev + 1 : prev));
+  };
+
+  const prevTabs = () => {
+    setTabIndex((prev) => (prev - 1 >= 0 ? prev - 1 : 0));
+  };
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div
+      className={`${
+        darkMode ? "bg-black text-white" : "bg-white text-black"
+      } min-h-screen flex flex-col items-center p-6 transition-colors duration-500`}
+    >
+      <div className="flex justify-end w-full max-w-md">
+        <div className="flex items-center gap-2">
+          <Sun className="w-4 h-4" />
+          <Switch checked={darkMode} onCheckedChange={setDarkMode} />
+          <Moon className="w-4 h-4" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      <div className="mt-6 text-center">
+        <img
+          src="/Profile.jpeg"
+          alt="profile"
+          className="rounded-full w-24 h-24 mx-auto border-4 border-blue-500"
+        />
+        <h1 className="text-2xl font-bold mt-4">@Dimitar</h1>
+        <p className="text-sm opacity-75">Building cool stuff on the web </p>
+        <p className="text-sm opacity-75">
+          There are even more projects that i made but these are enough to see
+          and more are coming too! 🚀
+        </p>
+      </div>
+
+      <div className="mt-6 flex items-center gap-2">
+        <Button onClick={prevTabs}>&lt;</Button>
+        <div className="flex gap-2 flex-wrap">
+          {visibleTabs.map((key) => (
+            <Button
+              key={key}
+              className={`${activeTab === key ? "bg-blue-700" : "bg-blue-500"}`}
+              onClick={() => setActiveTab(key)}
+            >
+              {tabNames[key as keyof typeof tabNames]}
+            </Button>
+          ))}
+        </div>
+        <Button onClick={nextTabs}>&gt;</Button>
+      </div>
+
+      <div className="mt-6 w-full max-w-md space-y-4">
+        {linkGroups[activeTab].map((link, idx) => (
+          <Card key={idx} className="hover:scale-[1.02] transition-transform">
+            <CardContent className="p-4 flex items-center gap-3">
+              <LinkIcon link={link.title} />
+              <a
+                href={link.url}
+                target="_blank"
+                className="text-lg font-medium"
+              >
+                {link.title}
+              </a>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="mt-10 text-sm opacity-60">Made with ❤️ by Dlink</div>
     </div>
   );
 }
