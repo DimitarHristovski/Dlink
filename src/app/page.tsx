@@ -4,18 +4,54 @@ import { Button } from "../components/buttons/button";
 import { Card, CardContent } from "./../components/card/card";
 import { Switch } from "../components/switch/switch";
 import { Sun, Moon } from "lucide-react";
-import { Instagram, Youtube, Coffee, Globe } from "lucide-react";
-
+import { linkGroups, tabNames } from "@/Data/ProjectData";
+import {
+  Linkedin,
+  Dribbble,
+  User,
+  Github,
+  Beef,
+  Code,
+  Gamepad2,
+  ShoppingBag,
+} from "lucide-react";
 export default function Dlink() {
   const [darkMode, setDarkMode] = useState(true);
+  const [activeTab, setActiveTab] = useState("social");
+  const [tabIndex, setTabIndex] = useState(0);
 
-  const links = [
-    { title: "My Portfolio", url: "https://example.com" },
-    { title: "Instagram", url: "https://instagram.com" },
-    { title: "YouTube Channel", url: "https://youtube.com" },
-    { title: "Buy Me Coffee ☕", url: "https://buymeacoffee.com" },
-  ];
+  const LinkIcon = ({ link }: { link: string }) => {
+    if (link.includes("My Portfolio")) return <User className="w-5 h-5" />;
+    if (link.includes("My Blog")) return <User className="w-5 h-5" />;
+    if (link.includes("Dribbble")) return <Dribbble className="w-5 h-5" />;
 
+    if (link.includes("Linkedin")) return <Linkedin className="w-5 h-5" />;
+    if (link.includes("Github")) return <Github className="w-5 h-5" />;
+    if (link.includes("Grillschulle")) return <Beef className="w-5 h-5" />;
+    if (link.includes("Furwood")) return <ShoppingBag className="w-5 h-5" />;
+    if (link.includes("COZA STORE")) return <ShoppingBag className="w-5 h-5" />;
+    if (link.includes("Portofolio(Competition)"))
+      return <Code className="w-5 h-5" />;
+    if (link.includes("Igraliste")) return <ShoppingBag className="w-5 h-5" />;
+    if (link.includes("Restaurant")) return <Code className="w-5 h-5" />;
+    if (link.includes("Architecture")) return <Code className="w-5 h-5" />;
+    if (link.includes("EduCenter")) return <Code className="w-5 h-5" />;
+
+    if (link.includes("Car Race")) return <Gamepad2 className="w-5 h-5" />;
+
+    return null;
+  };
+
+  const tabKeys = Object.keys(tabNames);
+  const visibleTabs = tabKeys.slice(tabIndex, tabIndex + 3);
+
+  const nextTabs = () => {
+    setTabIndex((prev) => (prev + 3 < tabKeys.length ? prev + 1 : prev));
+  };
+
+  const prevTabs = () => {
+    setTabIndex((prev) => (prev - 1 >= 0 ? prev - 1 : 0));
+  };
   return (
     <div
       className={`${
@@ -32,18 +68,39 @@ export default function Dlink() {
 
       <div className="mt-6 text-center">
         <img
-          src="https://i.pravatar.cc/100"
+          src="/Profile.jpeg"
           alt="profile"
-          className="rounded-full w-24 h-24 mx-auto border-4 border-purple-500"
+          className="rounded-full w-24 h-24 mx-auto border-4 border-blue-500"
         />
-        <h1 className="text-2xl font-bold mt-4">@dlink_user</h1>
-        <p className="text-sm opacity-75">Building cool stuff on the web 🚀</p>
+        <h1 className="text-2xl font-bold mt-4">@Dimitar</h1>
+        <p className="text-sm opacity-75">Building cool stuff on the web </p>
+        <p className="text-sm opacity-75">
+          There are even more projects that i made but these are enough to see
+          and more are coming too! 🚀
+        </p>
+      </div>
+
+      <div className="mt-6 flex items-center gap-2">
+        <Button onClick={prevTabs}>&lt;</Button>
+        <div className="flex gap-2 flex-wrap">
+          {visibleTabs.map((key) => (
+            <Button
+              key={key}
+              className={`${activeTab === key ? "bg-blue-700" : "bg-blue-500"}`}
+              onClick={() => setActiveTab(key)}
+            >
+              {tabNames[key as keyof typeof tabNames]}
+            </Button>
+          ))}
+        </div>
+        <Button onClick={nextTabs}>&gt;</Button>
       </div>
 
       <div className="mt-6 w-full max-w-md space-y-4">
-        {links.map((link, idx) => (
+        {linkGroups[activeTab].map((link, idx) => (
           <Card key={idx} className="hover:scale-[1.02] transition-transform">
-            <CardContent className="p-4">
+            <CardContent className="p-4 flex items-center gap-3">
+              <LinkIcon link={link.title} />
               <a
                 href={link.url}
                 target="_blank"
