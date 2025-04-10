@@ -84,7 +84,7 @@ export const linkGroups: Record<string, { title: string; url: string }[]> = {
   main: [
     {
       title: "My Portfolio",
-      url: "https://my-portfolio-git-main-dimitarhristovskis-projects.vercel.app/",
+      url: "https://dimitar-hristovski.vercel.app/",
     },
     {
       title: "My Blog",
