@@ -44,7 +44,7 @@ export default function Dlink() {
   };
 
   const tabKeys = Object.keys(tabNames);
-  const visibleTabs = tabKeys.slice(tabIndex, tabIndex + 3);
+  const visibleTabs = tabKeys.slice(tabIndex, tabIndex + 1);
 
   const nextTabs = () => {
     setTabIndex((prev) => (prev + 3 < tabKeys.length ? prev + 1 : prev));
