@@ -69,6 +69,8 @@ export default function Dlink() {
 
       <div className="mt-6 text-center">
         <Image
+          width={100}
+          height={100}
           src="/Profile.jpeg"
           alt="profile"
           className="rounded-full w-24 h-24 mx-auto border-4 border-blue-500"
