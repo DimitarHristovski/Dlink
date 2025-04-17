@@ -37,7 +37,10 @@ export const linkGroups: Record<string, { title: string; url: string }[]> = {
     },
   ],
   coOwned: [
-    { title: "Grillschulle", url: "" },
+    {
+      title: "Grillschulle",
+      url: "https://grillschulle.vercel.app/",
+    },
     {
       title: "Vesna-Dent",
       url: "https://github.com/DimitarHristovski/vesna-dent",
@@ -84,7 +87,7 @@ export const linkGroups: Record<string, { title: string; url: string }[]> = {
   main: [
     {
       title: "My Portfolio",
-      url: "https://dimitar-hristovski.vercel.app/",
+      url: "https://www.dimitarhristovski.com/",
     },
     {
       title: "My Blog",
