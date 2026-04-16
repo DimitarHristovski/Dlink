@@ -91,7 +91,7 @@ export function ScatteredCodeBackground() {
             duration: p.duration,
             repeat: Infinity,
             delay: p.delay,
-            ease: "easeInOut",
+            ease: "easeInOut" as const,
           }}
         >
           {p.text}
