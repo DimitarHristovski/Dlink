@@ -9,7 +9,9 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "px-4 py-2  rounded-xl text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition",
+        "rounded-xl px-4 py-2 text-sm font-medium text-neutral-950 transition dark:text-white",
+        "glass-panel hover:bg-white/55 dark:hover:bg-white/25",
+        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 dark:focus-visible:outline-neutral-100",
         className
       )}
       {...props}
@@ -18,6 +20,7 @@ export const Button = ({
     </button>
   );
 };
+
 export const ArrowButton = ({
   className,
   children,
@@ -26,7 +29,9 @@ export const ArrowButton = ({
   return (
     <button
       className={cn(
-        "px-2 py-1  square-xl font-medium bg-blue-600 text-white hover:bg-blue-700 transition",
+        "rounded-lg px-2 py-1.5 text-sm font-semibold text-neutral-950 transition dark:text-white",
+        "glass-panel hover:bg-white/55 dark:hover:bg-white/25",
+        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 dark:focus-visible:outline-neutral-100",
         className
       )}
       {...props}
